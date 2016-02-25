@@ -1,0 +1,38 @@
+rvm: 2.1
+
+sudo: required
+
+addons:
+  apt:
+    sources:
+      - chef-current-precise
+    packages:
+      - chefdk
+
+env:
+  matrix:
+    - PLATFORM='standalone-debian-78'
+    - PLATFORM='standalone-debian-82'
+    - PLATFORM='standalone-ubuntu-1404'
+    - PLATFORM='standalone-centos-67'
+    - PLATFORM='standalone-centos-72'
+    - PLATFORM='cluster-debian-78'
+    - PLATFORM='cluster-debian-82'
+    - PLATFORM='cluster-ubuntu-1404'
+    - PLATFORM='cluster-centos-67'
+    - PLATFORM='cluster-centos-72'
+
+install: echo "skip bundle install"
+
+before_script:
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - rubocop -v
+  - rspec -v
+  - foodcritic -V
+
+script:
+  - rspec
+  - rubocop
+  - foodcritic .
+  - kitchen verify ${PLATFORM}
+
