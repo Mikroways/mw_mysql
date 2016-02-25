@@ -1,5 +1,7 @@
 # Personalized mysql server cookbook
 
+[![Build Status](https://travis-ci.org/Mikroways/mw_mysql.svg?branch=master)](https://travis-ci.org/Mikroways/mw_mysql)
+
 The `mw_mysql` cookbook provides recipes for installing mysql server as a
 standalone instance, or acting as master or slave instance. Another feature
 provided is the fact that integrates with `mysql_tuning` cookbook.
