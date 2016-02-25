@@ -24,8 +24,8 @@ env:
 
 install:
   - sudo apt-get update -yq
-  - sudo apt-get install -yq linux-headers-generic virtualbox virtualbox-dkms --fix-missing
-  -  sudo dpkg-reconfigure virtualbox-dkms
+  - sudo apt-get install -yq linux-headers-`uname -r` dkms build-essential virtualbox virtualbox-dkms --fix-missing
+  - sudo dpkg-reconfigure virtualbox-dkms
   - sudo wget -nv https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
   - sudo dpkg -i vagrant_1.8.1_x86_64.deb
   - sudo apt-get install -yf
