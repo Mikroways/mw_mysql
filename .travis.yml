@@ -27,12 +27,15 @@ install:
   - sudo apt-get install -yq virtualbox --fix-missing
   - sudo wget -nv https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
   - sudo dpkg -i vagrant_1.8.1_x86_64.deb
+  - sudo apt-get install -yf
 
 before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - rubocop -v
   - rspec -v
   - foodcritic -V
+  - VBoxManage --version
+  - /opt/chefdk/embedded/bin/chef gem install chef-sugar
 
 script:
   - rspec
