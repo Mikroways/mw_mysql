@@ -22,7 +22,11 @@ env:
     - PLATFORM='cluster-centos-67'
     - PLATFORM='cluster-centos-72'
 
-install: echo "skip bundle install"
+install:
+  - sudo apt-get update -yq
+  - sudo apt-get install -yq virtualbox --fix-missing
+  - sudo wget -nv https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
+  - sudo dpkg -i vagrant_1.8.1_x86_64.deb
 
 before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
