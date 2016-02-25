@@ -1,3 +1,1 @@
-include_recipe 'mw_mysql::_reqs'
-mw_mysql_server 'main'
-
+mw_mysql_server 'main', root_password: 'change me'

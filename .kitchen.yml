@@ -5,17 +5,39 @@ driver:
 provisioner:
   name: chef_zero
 
-# Uncomment the following verifier to leverage Inspec instead of Busser (the
-# default verifier)
-# verifier:
-#   name: inspec
-
 platforms:
+  - name: debian-7.8
+    run_list:
+      - recipe[apt]
+  - name: debian-8.2
+    run_list:
+      - recipe[apt]
+      - recipe[netstat]
   - name: ubuntu-14.04
-  - name: centos-7.1
+    run_list:
+      - recipe[apt]
+      - recipe[netstat]
+  - name: centos-6.7
+    #        - yum install -y initscripts
+    run_list:
+      - recipe[yum]
+      - recipe[netstat]
+  - name: centos-7.2
+        #    - yum install -y iproute
+    run_list:
+      - recipe[yum]
+      - recipe[netstat]
 
 suites:
-  - name: default
-    run_list:
-      - recipe[cespi_mysql::default]
+  - name: standalone
     attributes:
+      mw_mysql:
+        enable_tmpdir: true
+        tmpdir_size: 128M
+        max_connections: 10
+        expire_logs_days: 5
+    run_list:
+      - recipe[mw_mysql]
+  - name: cluster
+    run_list:
+      - recipe[integration_test::master_slave]

@@ -1,3 +1,3 @@
 mysql_client 'default' do
-    action :create
+  action :create
 end

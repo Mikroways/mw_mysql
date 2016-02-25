@@ -2,4 +2,8 @@ source 'https://supermarket.chef.io'
 
 metadata
 
-cookbook 'apt'
+group :integration do
+  cookbook 'apt'
+  cookbook 'netstat'
+  cookbook 'integration_test', path: 'test/fixtures/cookbooks/integration_test'
+end
