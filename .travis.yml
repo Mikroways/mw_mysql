@@ -11,32 +11,19 @@ addons:
 
 env:
   matrix:
-    - PLATFORM='standalone-debian-78'
-    - PLATFORM='standalone-debian-82'
-    - PLATFORM='standalone-ubuntu-1404'
-    - PLATFORM='standalone-centos-67'
-    - PLATFORM='standalone-centos-72'
-    - PLATFORM='cluster-debian-78'
-    - PLATFORM='cluster-debian-82'
-    - PLATFORM='cluster-ubuntu-1404'
-    - PLATFORM='cluster-centos-67'
-    - PLATFORM='cluster-centos-72'
+    - PLATFORM='default-ubuntu-1404'
 
-install:
-  - sudo apt-get update -yq
-  - sudo apt-get install -yq linux-headers-`uname -r` dkms build-essential virtualbox virtualbox-dkms --fix-missing
-  - sudo dpkg-reconfigure virtualbox-dkms
-  - sudo wget -nv https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
-  - sudo dpkg -i vagrant_1.8.1_x86_64.deb
-  - sudo apt-get install -yf
+install: echo "skip bundle install"
+
+services: docker
 
 before_script:
+  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - rubocop -v
   - rspec -v
   - foodcritic -V
-  - VBoxManage --version
-  - /opt/chefdk/embedded/bin/chef gem install chef-sugar
+  - /opt/chefdk/embedded/bin/chef gem install kitchen-docker
 
 script:
   - rspec

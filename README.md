@@ -134,10 +134,11 @@ mw_mysql_slave_server root_password: 'slave',
 
 ## Kitchen testing
 
-For quick testing with kitchen using Docker driver run:
+Travis will use default .kitchen based on Docker driver. 
+
+If you prefer to test recipe for all platforms, run:
 
 ```
-KITCHEN_LOCAL_YAML=.kitchen-docker.yml
+KITCHEN_LOCAL_YAML=.kitchen_vagrant.yml
 ```
 
-Otherwise, ie when not `KITCHEN_LOCAL_YAML` si specified, vagrant driver will be used
