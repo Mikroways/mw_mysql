@@ -11,7 +11,8 @@ addons:
 
 env:
   matrix:
-    - PLATFORM='default-ubuntu-1404'
+    - PLATFORM='standalone-ubuntu-1404'
+    - PLATFORM='cluster-ubuntu-1404'
 
 install: echo "skip bundle install"
 
@@ -24,6 +25,7 @@ before_script:
   - rspec -v
   - foodcritic -V
   - /opt/chefdk/embedded/bin/chef gem install kitchen-docker
+  - /opt/chefdk/embedded/bin/chef gem install chef-sugar
 
 script:
   - rspec
