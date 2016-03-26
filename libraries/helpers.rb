@@ -117,6 +117,7 @@ def mw_mysql_dot_file(options)
   port = options[:port]
   config_file_name = mw_mysql_config_filename(options)
   file config_file_name do
+    sensitive true
     content <<-MYCNF
 [client]
   password=#{password}
