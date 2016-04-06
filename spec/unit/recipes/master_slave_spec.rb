@@ -19,8 +19,8 @@ describe 'integration_test::master_slave' do
     end
 
     it 'set logs attributes' do
-      expect(chef_run.node['mw_mysql']['master-1']['log_dir']).to eq '/var/log/mysql-master-1'
-      expect(chef_run.node['mw_mysql']['slave-2']['log_dir']).to eq '/var/log/mysql-slave-2'
+      expect(chef_run.node['mw_mysql']['instances']['master-1']['log_dir']).to eq '/var/log/mysql-master-1'
+      expect(chef_run.node['mw_mysql']['instances']['slave-2']['log_dir']).to eq '/var/log/mysql-slave-2'
     end
   end
 end
