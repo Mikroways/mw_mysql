@@ -56,7 +56,7 @@ end
 def mw_mysql_replication_server(instance_name, template, options)
   mw_mysql_server instance_name, options
 
-  node.set['mw_mysql']['instances']||= {}
+  node.set['mw_mysql']['instances'] ||= {}
   node.set['mw_mysql']['instances'][instance_name]['log_dir'] = "/var/log/mysql-#{instance_name}"
 
   mysql_config "Replication #{instance_name}" do
