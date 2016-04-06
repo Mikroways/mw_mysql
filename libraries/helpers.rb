@@ -56,12 +56,14 @@ end
 def mw_mysql_replication_server(instance_name, template, options)
   mw_mysql_server instance_name, options
 
+  node.set['mw_mysql'][instance_name]['log_dir'] = "/var/log/mysql-#{instance_name}"
+
   mysql_config "Replication #{instance_name}" do
     config_name 'replication'
     instance instance_name
     source template
     cookbook 'mw_mysql'
-    variables(server_id: options[:server_id], mysql_instance: instance_name)
+    variables(server_id: options[:server_id], mysql_instance: instance_name, logs: node['mw_mysql'][instance_name]['log_dir'])
     notifies :restart, "mysql_service[#{instance_name}]", :immediately
     action :create
   end
