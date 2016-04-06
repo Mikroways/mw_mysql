@@ -9,9 +9,9 @@ describe 'integration_test::master_slave' do
     end
 
     before do
-       stub_command("/usr/bin/mysql --defaults-file=/root/.my.cnf -e 'select User,Host from mysql.user' | grep repl").and_return(false)
-       stub_command("/usr/bin/mysql --defaults-file=/root/.my_slave.cnf -e 'select User,Host from mysql.user' | grep repl").and_return(false)
-       stub_command("/usr/bin/mysql --defaults-file=/root/.my_slave.cnf -Ee 'SHOW SLAVE STATUS' | grep Slave_IO_State").and_return(false)
+      stub_command("/usr/bin/mysql --defaults-file=/root/.my.cnf -e 'select User,Host from mysql.user' | grep repl").and_return(false)
+      stub_command("/usr/bin/mysql --defaults-file=/root/.my_slave.cnf -e 'select User,Host from mysql.user' | grep repl").and_return(false)
+      stub_command("/usr/bin/mysql --defaults-file=/root/.my_slave.cnf -Ee 'SHOW SLAVE STATUS' | grep Slave_IO_State").and_return(false)
     end
 
     it 'converges successfully' do
